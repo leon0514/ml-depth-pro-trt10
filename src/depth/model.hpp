@@ -20,7 +20,7 @@ struct DeepthMap
 
 
     DeepthMap(DeepthMap&& depth)
-        : width(depth.width), height(depth.height), depth_map(std::move(depth.depth_map))
+        : fov_deg(depth.fov_deg), width(depth.width), height(depth.height), depth_map(std::move(depth.depth_map))
     { }
 
 
