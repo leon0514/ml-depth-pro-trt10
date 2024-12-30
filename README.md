@@ -1,7 +1,7 @@
 #  <center> ml-depth-pro C++ tensorrt ⚡
 
 <div align="center">
-<img height="500" src="https://github.com/leon0514/ml-depth-pro-trt10/blob/main/workspace/assert/example.png" />
+<img height="500" src="https://github.com/leon0514/ml-depth-pro-trt10/blob/main/example.png" />
 <br />
 <br />
 </div>
