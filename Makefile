@@ -83,6 +83,7 @@ run       : $(name)
 pro       : $(workdir)/pro
 
 runpro    : pro
+	@export LD_LIBRARY_PATH:=$(library_path_export)
 	@cd $(workdir) && ./pro
 
 $(workdir)/$(name) : $(cpp_objs) $(cu_objs)
@@ -120,5 +121,3 @@ clean :
 	@rm -rf $(objdir) $(workdir)/$(name) $(workdir)/pro $(workdir)/*.trtmodel $(workdir)/imgs
 
 .PHONY : clean run $(name) runpro
-
-export LD_LIBRARY_PATH:=$(library_path_export)
