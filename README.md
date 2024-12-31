@@ -102,11 +102,11 @@ t.stop();
     ```
 
 
-## 不同分辨率模型测试
-### 768 x 768
+## 🧪 不同分辨率模型测试
+### 768 x 768 识别结果
 <img height="500" src="https://github.com/leon0514/ml-depth-pro-trt10/blob/main/768x768.jpg" />
 
-### 1152 x 1152
+### 1152 x 1152 识别结果
 <img height="500" src="https://github.com/leon0514/ml-depth-pro-trt10/blob/main/1152x1152.jpg" />
 ## 🤖 测试环境
 - 系统  
