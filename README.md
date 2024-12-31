@@ -104,7 +104,8 @@ t.stop();
 
 ## 🧪 不同分辨率模型测试
 测试结果为pytorch识别   
-使用不同分辨率模型脚本: workspace/convert_to_coreml.py
+使用不同分辨率模型脚本: workspace/convert_to_coreml.py  
+来源：https://github.com/harism/ml-depth-pro
 ### 768 x 768 识别结果
 <img height="500" src="https://github.com/leon0514/ml-depth-pro-trt10/blob/main/768x768.jpg" />
 
