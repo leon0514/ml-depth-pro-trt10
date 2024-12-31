@@ -15,6 +15,8 @@ namespace TensorRT
 using namespace std;
 using namespace nvinfer1;
 
+static size_t upbound(size_t n, size_t align) { return (n + align - 1) / align * align; }
+
 BaseMemory::BaseMemory(void *cpu, size_t cpu_bytes, void *gpu, size_t gpu_bytes) {
   reference(cpu, cpu_bytes, gpu, gpu_bytes);
 }
@@ -46,10 +48,11 @@ void BaseMemory::reference(void *cpu, size_t cpu_bytes, void *gpu, size_t gpu_by
 BaseMemory::~BaseMemory() { release(); }
 
 void *BaseMemory::gpu_realloc(size_t bytes) {
-  if (gpu_capacity_ < bytes) {
+  size_t size = upbound(bytes, 32);
+  if (gpu_capacity_ < size) {
     release_gpu();
 
-    gpu_capacity_ = bytes;
+    gpu_capacity_ = size;
     checkRuntime(cudaMalloc(&gpu_, bytes));
     // checkRuntime(cudaMemset(gpu_, 0, size));
   }
@@ -58,10 +61,11 @@ void *BaseMemory::gpu_realloc(size_t bytes) {
 }
 
 void *BaseMemory::cpu_realloc(size_t bytes) {
-  if (cpu_capacity_ < bytes) {
+  size_t size = upbound(bytes, 32);
+  if (cpu_capacity_ < size) {
     release_cpu();
 
-    cpu_capacity_ = bytes;
+    cpu_capacity_ = size;
     checkRuntime(cudaMallocHost(&cpu_, bytes));
     Assert(cpu_ != nullptr);
     // memset(cpu_, 0, size);

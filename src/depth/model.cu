@@ -8,11 +8,6 @@
 namespace depth
 {
 
-static int upbound(int n, int align)
-{ 
-    return (n + align - 1) / align * align; 
-}
-
 using namespace std;
 
 class DepthProModelImpl : public Infer 
@@ -67,7 +62,7 @@ public:
         size_t input_numel = network_input_width_ * network_input_height_ * 3;
         float *input_device = input_buffer_.gpu() + ibatch * input_numel;
         size_t size_image = image.width * image.height * 3;
-        size_t size_matrix = upbound(sizeof(affine.d2i), 32);
+        size_t size_matrix = sizeof(affine.d2i);
         uint8_t *gpu_workspace = preprocess_buffer->gpu(size_matrix + size_image);
         float *affine_matrix_device = (float *)gpu_workspace;
         uint8_t *image_device = gpu_workspace + size_matrix;
@@ -101,7 +96,7 @@ public:
         affine::ResizeMatrix affine;
         affine.compute(make_tuple(network_input_width_, network_input_height_),make_tuple(width, height));
 
-        size_t size_matrix = upbound(sizeof(affine.d2i), 32);
+        size_t size_matrix = sizeof(affine.d2i);
 
         TensorRT::Memory<float> affine_matrix;
 
