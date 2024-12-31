@@ -108,6 +108,7 @@ t.stop();
 
 ### 1152 x 1152 识别结果
 <img height="500" src="https://github.com/leon0514/ml-depth-pro-trt10/blob/main/1152x1152.jpg" />
+
 ## 🤖 测试环境
 - 系统  
 Ubuntu 22.04 LTS 
@@ -115,8 +116,6 @@ Ubuntu 22.04 LTS
 nvcr.io/nvidia/tensorrt:24.10-py3
 - gpu   
 3090
-
-
 
 ## 👏 参考
 - https://github.com/shouxieai/infer 
