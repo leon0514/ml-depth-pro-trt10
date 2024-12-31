@@ -1,5 +1,5 @@
 #ifndef AFFINE_HPP__
-#define AAFFINE_HPP__
+#define AFFINE_HPP__
 
 #include <memory>
 #include <cuda_runtime.h>
