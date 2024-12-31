@@ -55,7 +55,7 @@ void depth_proInfer()
     auto depth_pro = depth::load("depth_pro.engine");
     if (depth_pro == nullptr) return;
 
-    cv::Mat image = cv::imread("images/girl.jpg");
+    cv::Mat image = cv::imread("inference/girl.jpg");
     int width = image.cols;
 
     nv::EventTimer t;
@@ -82,7 +82,7 @@ void depth_proInfer()
     cv::Mat inverse_depth = compute_depth(depth_mat, width, height, depth_map.fov_deg);
     
     cv::Mat color_depth_bgr = get_color_depth(inverse_depth);
-    cv::imwrite("result/color_depth_111.jpg", color_depth_bgr);
+    cv::imwrite("color_map.jpg", color_depth_bgr);
     
 }
 

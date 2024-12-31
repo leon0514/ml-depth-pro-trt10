@@ -28,7 +28,7 @@ def save_color_map(inverse_depth_normalized, save_path):
 
 def test():
     engine_path = "depth_pro.engine"
-    image_path  = "images/bus.jpg"
+    image_path  = "inference/bus.jpg"
 
     image = cv2.imread(image_path)
     h, w, _ = image.shape

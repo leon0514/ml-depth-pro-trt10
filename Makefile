@@ -83,7 +83,7 @@ run       : $(name)
 pro       : $(workdir)/pro
 
 runpro    : pro
-	@export LD_LIBRARY_PATH:=$(library_path_export)
+	@export LD_LIBRARY_PATH=$(library_path_export)
 	@cd $(workdir) && ./pro
 
 $(workdir)/$(name) : $(cpp_objs) $(cu_objs)
