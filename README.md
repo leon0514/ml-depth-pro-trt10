@@ -106,7 +106,7 @@ t.stop();
 测试结果为pytorch识别   
 使用不同分辨率模型脚本: workspace/convert_to_coreml.py  
 来源：https://github.com/harism/ml-depth-pro
-尝试转onnx再到engine推理，结果不对
+备注：转为onnx后可以使用onnxruntime推理，转为engine后推理结果是错误的。
 ### 768 x 768 识别结果
 <img height="500" src="https://github.com/leon0514/ml-depth-pro-trt10/blob/main/768x768.jpg" />
 
