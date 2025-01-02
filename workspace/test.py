@@ -38,7 +38,9 @@ def test():
     depth_map = np.array(res.depth_map)
     depth_map = depth_map.reshape(h, w)
 
-    depth = compute_depth(w, h, depth_map, np.array([res.fov_deg]))
+    fov_deg = np.array([res.fov_deg])
+
+    depth = compute_depth(w, h, fov_deg, depth_map)
 
     inverse_depth_normalized = normlized(depth)
     save_color_map(inverse_depth_normalized, "res.jpg")
