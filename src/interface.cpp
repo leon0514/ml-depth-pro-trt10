@@ -152,12 +152,12 @@ private:
 
 
 PYBIND11_MODULE(trtdepthpro, m){
-    py::class_<depth::DeepthMap>(m, "DeepthMap")
-        .def_readwrite("width", &depth::DeepthMap::width)
-        .def_readwrite("height", &depth::DeepthMap::height)
-        .def_readwrite("fov_deg", &depth::DeepthMap::fov_deg)
-        .def_readwrite("depth_map", &depth::DeepthMap::depth_map)
-        .def("__repr__", [](const depth::DeepthMap &depth_map) {
+    py::class_<depth::DepthMap>(m, "DeepthMap")
+        .def_readwrite("width", &depth::DepthMap::width)
+        .def_readwrite("height", &depth::DepthMap::height)
+        .def_readwrite("fov_deg", &depth::DepthMap::fov_deg)
+        .def_readwrite("depth_map", &depth::DepthMap::depth_map)
+        .def("__repr__", [](const depth::DepthMap &depth_map) {
             std::ostringstream oss;
             oss << "DeepthMap(width: " << depth_map.width
                 << ", height: " << depth_map.height

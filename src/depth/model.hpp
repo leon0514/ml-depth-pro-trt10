@@ -8,18 +8,18 @@
 namespace depth
 {
 
-struct DeepthMap
+struct DepthMap
 {
     int width = 0, height = 0;
     float fov_deg = 0.f;
     std::vector<float> depth_map;
     
-    DeepthMap(int width, int height)
+    DepthMap(int width, int height)
         : width(width), height(height), depth_map(width * height, 0.0f)
     { }
 
 
-    DeepthMap(DeepthMap&& depth)
+    DpthMap(DepthMap&& depth)
         : fov_deg(depth.fov_deg), width(depth.width), height(depth.height), depth_map(std::move(depth.depth_map))
     { }
 
@@ -32,7 +32,7 @@ struct DeepthMap
 
 class Infer {
 public:
-    virtual DeepthMap forward(const TensorRT::Image &image, void *stream = nullptr) = 0;
+    virtual DepthMap forward(const TensorRT::Image &image, void *stream = nullptr) = 0;
 };
 
 std::shared_ptr<Infer> load(const std::string &engine_file, int gpu_id=0);

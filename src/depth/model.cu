@@ -138,7 +138,7 @@ public:
         return true;
     }
 
-    virtual DeepthMap forward(const TensorRT::Image& image, void *stream = nullptr) override
+    virtual DepthMap forward(const TensorRT::Image& image, void *stream = nullptr) override
     {
         auto input_dims = trt_->static_dims(0);
         int infer_batch_size = input_dims[0];
@@ -191,7 +191,7 @@ public:
 
         
 
-        DeepthMap arrout(image.width, image.height);
+        DepthMap arrout(image.width, image.height);
         std::memcpy(arrout.depth_map.data(), depth_map_buffer_.cpu(), image.width * image.height * sizeof(float));
         arrout.fov_deg = *(fov_deg_.cpu());
         return arrout;

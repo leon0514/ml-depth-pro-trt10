@@ -21,13 +21,13 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef __CHECK_HPP__
-#define __CHECK_HPP__
+#ifndef __CHECK_HPP_
+#define __CHECK_HPP_
 
-#include <assert.h>
+#include <cassert>
 #include <cuda_runtime.h>
-#include <stdarg.h>
-#include <stdio.h>
+#include <cstdarg>
+#include <cstdio>
 
 #include <string>
 

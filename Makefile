@@ -1,8 +1,8 @@
 cc        := g++
 name      := trtdepthpro.so
 workdir   := workspace
-src_dir    := src
-obj_dir    := objs
+src_dir   := src
+obj_dir   := objs
 stdcpp    := c++17
 cuda_home := /usr/local/cuda-12
 cuda_arch := 8.6
