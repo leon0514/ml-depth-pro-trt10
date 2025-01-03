@@ -1,8 +1,8 @@
 cc        := g++
 name      := trtdepthpro.so
 workdir   := workspace
-srcdir    := src
-objdir    := objs
+src_dir    := src
+obj_dir    := objs
 stdcpp    := c++17
 cuda_home := /usr/local/cuda-12
 cuda_arch := 8.6
@@ -41,29 +41,29 @@ link_trt          := nvinfer nvinfer_plugin nvonnxparser
 link_cuda         := cuda cublas cudart cudnn
 link_sys          := stdc++ dl
 
-link_librarys     := $(link_opencv) $(link_trt) $(link_cuda) $(link_sys)
+link_libraries     := $(link_opencv) $(link_trt) $(link_cuda) $(link_sys)
 
 
 empty := 
 library_path_export := $(subst $(empty) $(empty),:,$(library_paths))
 
-run_paths     := $(foreach item,$(library_paths),-Wl,-rpath=$(item))
-include_paths := $(foreach item,$(include_paths),-I$(item))
-library_paths := $(foreach item,$(library_paths),-L$(item))
-link_librarys := $(foreach item,$(link_librarys),-l$(item))
+run_paths      := $(foreach item,$(library_paths),-Wl,-rpath=$(item))
+include_paths  := $(foreach item,$(include_paths),-I$(item))
+library_paths  := $(foreach item,$(library_paths),-L$(item))
+link_libraries := $(foreach item,$(link_librarys),-l$(item))
 
 cpp_compile_flags := -std=$(stdcpp) -w -g -O0 -m64 -fPIC -fopenmp -pthread $(include_paths)
 cu_compile_flags  := -Xcompiler "$(cpp_compile_flags)"
 link_flags        := -pthread -fopenmp -Wl,-rpath='$$ORIGIN' $(library_paths) $(link_librarys)
 
-cpp_srcs := $(shell find $(srcdir) -name "*.cpp")
+cpp_srcs := $(shell find $(src_dir) -name "*.cpp")
 cpp_objs := $(cpp_srcs:.cpp=.cpp.o)
-cpp_objs := $(cpp_objs:$(srcdir)/%=$(objdir)/%)
+cpp_objs := $(cpp_objs:$(src_dir)/%=$(objdir)/%)
 cpp_mk   := $(cpp_objs:.cpp.o=.cpp.mk)
 
-cu_srcs := $(shell find $(srcdir) -name "*.cu")
+cu_srcs := $(shell find $(src_dir) -name "*.cu")
 cu_objs := $(cu_srcs:.cu=.cu.o)
-cu_objs := $(cu_objs:$(srcdir)/%=$(objdir)/%)
+cu_objs := $(cu_objs:$(src_dir)/%=$(objdir)/%)
 cu_mk   := $(cu_objs:.cu.o=.cu.mk)
 
 pro_cpp_objs := $(filter-out objs/interface.cpp.o, $(cpp_objs))
@@ -77,12 +77,9 @@ $(name)   : $(workdir)/$(name)
 
 all       : $(name)
 
-run       : $(name)
-	@cd $(workdir) && python3 test.py
-
 pro       : $(workdir)/pro
 
-runpro    : pro
+run : pro
 	@export LD_LIBRARY_PATH=$(library_path_export)
 	@cd $(workdir) && ./pro
 
@@ -96,22 +93,22 @@ $(workdir)/pro : $(pro_cpp_objs) $(cu_objs)
 	@mkdir -p $(dir $@)
 	@$(cc) $^ -o $@ $(link_flags)
 
-$(objdir)/%.cpp.o : $(srcdir)/%.cpp
+$(obj_dir)/%.cpp.o : $(src_dir)/%.cpp
 	@echo Compile CXX $<
 	@mkdir -p $(dir $@)
 	@$(cc) -c $< -o $@ $(cpp_compile_flags)
 
-$(objdir)/%.cu.o : $(srcdir)/%.cu
+$(obj_dir)/%.cu.o : $(src_dir)/%.cu
 	@echo Compile CUDA $<
 	@mkdir -p $(dir $@)
 	@$(nvcc) -c $< -o $@ $(cu_compile_flags)
 
-$(objdir)/%.cpp.mk : $(srcdir)/%.cpp
+$(obj_dir)/%.cpp.mk : $(src_dir)/%.cpp
 	@echo Compile depends C++ $<
 	@mkdir -p $(dir $@)
 	@$(cc) -M $< -MF $@ -MT $(@:.cpp.mk=.cpp.o) $(cpp_compile_flags)
 
-$(objdir)/%.cu.mk : $(srcdir)/%.cu
+$(obj_dir)/%.cu.mk : $(src_dir)/%.cu
 	@echo Compile depends CUDA $<
 	@mkdir -p $(dir $@)
 	@$(nvcc) -M $< -MF $@ -MT $(@:.cu.mk=.cu.o) $(cu_compile_flags)
@@ -120,4 +117,4 @@ $(objdir)/%.cu.mk : $(srcdir)/%.cu
 clean :
 	@rm -rf $(objdir) $(workdir)/$(name) $(workdir)/pro $(workdir)/*.trtmodel $(workdir)/imgs
 
-.PHONY : clean run $(name) runpro
+.PHONY : clean run $(name) pro
