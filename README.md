@@ -98,7 +98,7 @@ t.stop();
     ------------------------------------------------------
     >>> res = model.forward(image)
     >>> res
-    DeepthMap(width: 810, height: 1080, fov_deg: 37.1668)
+    DepthMap(width: 810, height: 1080, fov_deg: 37.1668)
     ```
 
 

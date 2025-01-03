@@ -10,6 +10,7 @@
 workspace/pro
 *.engine
 objs
+.idea
 
 # Precompiled Headers
 *.gch
