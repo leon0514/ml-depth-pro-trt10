@@ -53,7 +53,7 @@ void *BaseMemory::gpu_realloc(size_t bytes) {
     release_gpu();
 
     gpu_capacity_ = size;
-    checkRuntime(cudaMalloc(&gpu_, bytes));
+    checkRuntime(cudaMalloc(&gpu_, size));
     // checkRuntime(cudaMemset(gpu_, 0, size));
   }
   gpu_bytes_ = bytes;
@@ -66,7 +66,7 @@ void *BaseMemory::cpu_realloc(size_t bytes) {
     release_cpu();
 
     cpu_capacity_ = size;
-    checkRuntime(cudaMallocHost(&cpu_, bytes));
+    checkRuntime(cudaMallocHost(&cpu_, size));
     Assert(cpu_ != nullptr);
     // memset(cpu_, 0, size);
   }
